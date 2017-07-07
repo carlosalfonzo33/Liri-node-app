@@ -11,7 +11,7 @@ var twitterUser = new twitter({
     access_token_secret: twitterKeys.access_token_secret
 });
 
-console.log(twitterUser.consumer_key);    
+//console.log(twitterUser.consumer_key);    
 
 switch(liriCommand) {
     case "my-tweets":
