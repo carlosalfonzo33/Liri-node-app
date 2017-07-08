@@ -20,11 +20,13 @@ switch(liriCommand) {
 }
 
 function myTweets(){
-    twitterUser.get('search/tweets', {q: 'carlosalfonzo33', count: 20}, function(error, tweet, response) {
-        if(error){
-            console.log(error);
-        }else{
-            console.log(tweet);
+    twitterUser.get('statuses/user_timeline', {q: 'carlosalfonzo33', count: 20}, function(error, tweet, response) {
+        if(!error){
+             for (var i = 0; i < tweet.length; i++) {
+                            console.log(tweet[i].text);
+                            console.log('----------------------------------------------------');
+                           
+} 
         }
     });
 };
