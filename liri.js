@@ -25,7 +25,7 @@ function myTweets(){
              for (var i = 0; i < tweet.length; i++) {
                             console.log(tweet[i].text);
                             console.log(tweet[i].created_at);
-                            console.log('----------------------------------------------------');
+                            console.log('====================================================');
 
                            
 } 
