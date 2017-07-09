@@ -1,9 +1,9 @@
 var keys = require("./keys.js");
 var twitter = require("twitter");
+var spotify = require('spotify');
 var fs = require("fs");
 var liriCommand = process.argv[2];
 var twitterKeys = keys.twitterKeys;
-
 var twitterUser = new twitter({
     consumer_key: twitterKeys.consumer_key,
     consumer_secret: twitterKeys.consumer_secret,
@@ -26,9 +26,20 @@ function myTweets(){
                             console.log(tweet[i].text);
                             console.log(tweet[i].created_at);
                             console.log('====================================================');
+                            append(tweet[i].text+'\n');
+                            append(tweet[i].created_at+'\n');
+                            append('=====================================================\n');
 
                            
 } 
         }
     });
 };
+
+function append(append) {
+    fs.appendFile('log.txt', append, (err) => {
+        if (err) throw err;
+    });
+}
+
+
