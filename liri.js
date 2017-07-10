@@ -28,16 +28,16 @@ switch (liriCommand) {
         break;
 
     case "spotify-this-song":
-    mySpotify();
-    break;
+        mySpotify();
+        break;
 
     case "movie-this":
-    myMovie();
-    break;
+        myMovie();
+        break;
 
     case "do-what-it-says":
-    mySays();
-    break;
+        mySays();
+        break;
 }
 
 
@@ -68,32 +68,35 @@ function myTweets() {
 
 function mySpotify() {
 
-        if (!searchTitle){
+    if (!searchTitle) {
         searchTitle = 'Ace Of Base - The Sign';
     }
 
-        clientSpotify.search({ type: 'track', query: searchTitle }, function(error, data) {
-    
+    clientSpotify.search({
+        type: 'track',
+        query: searchTitle
+    }, function(error, data) {
+
         if (error) {
             return console.log('Error occurred: ' + error);
         }
-     
+
         for (var i = 0; i < data.tracks.items.length; i++) {
 
             var response = data.tracks.items[i];
-        
+
             console.log(
                 '\n' +
                 'Artist(s): ' + response.artists[0].name + '\n' +
-                'Track Name: ' + response.name  + '\n' +
+                'Track Name: ' + response.name + '\n' +
                 'Track Preview: ' + response.preview_url + '\n' +
                 'Album: ' + response.album.name
             )
-                append('Artist(s): ' + response.artists[0].name + '\n');
-                append('Track Name: ' + response.name  + '\n');
-                append('Track Preview: ' + response.preview_url + '\n');
-                append('Album: ' + response.album.name + '\n');
-                append('=====================================================\n');
+            append('Artist(s): ' + response.artists[0].name + '\n');
+            append('Track Name: ' + response.name + '\n');
+            append('Track Preview: ' + response.preview_url + '\n');
+            append('Album: ' + response.album.name + '\n');
+            append('=====================================================\n');
         }
 
     });
@@ -101,26 +104,26 @@ function mySpotify() {
 
 // Funtion for Movie this. 
 
-function myMovie(){
+function myMovie() {
 
-     if (!searchTitle){
+    if (!searchTitle) {
         searchTitle = 'Mr. Nobody';
     }
     var omdbUrl = "http://www.omdbapi.com/?&t=" + searchTitle + "&apikey=40e9cece";
     console.log(searchTitle);
-    
-    request(omdbUrl, function (error, response, body) {
-                
+
+    request(omdbUrl, function(error, response, body) {
+
         if (error) {
             return console.log('Error occurred: ' + error);
         }
 
         var movie = JSON.parse(body);
-            
+
         console.log(
             '\n' +
             'Title: ' + movie.Title + '\n' +
-            'Year: '+ movie.Year + '\n' +
+            'Year: ' + movie.Year + '\n' +
             'IMDB Rating: ' + movie.imdbRating + '\n' +
             'Rotten Tomatoes Rating: ' + movie.Ratings[1].Value + '\n' +
             'Country: ' + movie.Country + '\n' +
@@ -128,56 +131,59 @@ function myMovie(){
             'Plot: ' + movie.Plot + '\n' +
             'Actors: ' + movie.Actors + '\n'
         );
-            append('=====================================================\n');
-            append('Title: ' + movie.Title + '\n');
-            append('Year: '+ movie.Year + '\n');
-            append('IMDB Rating: ' + movie.imdbRating + '\n');
-            append('Rotten Tomatoes Rating: ' + movie.Ratings[1].Value + '\n');
-            append('Country: ' + movie.Country + '\n');
-            append('Language: ' + movie.Language + '\n');
-            append('Plot: ' + movie.Plot + '\n');
-            append('Actors: ' + movie.Actors + '\n');
-            append('\n');
-            
+        append('=====================================================\n');
+        append('Title: ' + movie.Title + '\n');
+        append('Year: ' + movie.Year + '\n');
+        append('IMDB Rating: ' + movie.imdbRating + '\n');
+        append('Rotten Tomatoes Rating: ' + movie.Ratings[1].Value + '\n');
+        append('Country: ' + movie.Country + '\n');
+        append('Language: ' + movie.Language + '\n');
+        append('Plot: ' + movie.Plot + '\n');
+        append('Actors: ' + movie.Actors + '\n');
+        append('\n');
+
 
     });
 }
 
 // Function for do-what-it-says
 
-function mySays(){
-     fs.readFile("random.txt", "utf8", function(error, data) {
-            
+function mySays() {
+    fs.readFile("random.txt", "utf8", function(error, data) {
+
         if (error) {
             return console.log('Error occurred: ' + error);
         }
-    
+
         var splitData = data.split(",");
 
-        clientSpotify.search({ type: 'track', query: splitData[1] }, function(error, data) {
-            
+        clientSpotify.search({
+            type: 'track',
+            query: splitData[1]
+        }, function(error, data) {
+
             if (error) {
                 return console.log('Error occurred: ' + error);
             }
-                
+
             for (var i = 0; i < data.tracks.items.length; i++) {
 
-            var response = data.tracks.items[i];
-                
+                var response = data.tracks.items[i];
+
                 console.log(
                     '\n' +
                     'Artist(s): ' + response.artists[0].name + '\n' +
-                    'Track Name: ' + response.name  + '\n' +
+                    'Track Name: ' + response.name + '\n' +
                     'Track Preview: ' + response.preview_url + '\n' +
                     'Album: ' + response.album.name
                 )
             }
-                    append('=====================================================\n');
-                    append('Artist(s): ' + response.artists[0].name + '\n');
-                    append('Track Name: ' + response.name  + '\n');
-                    append('Track Preview: ' + response.preview_url + '\n');
-                    append('Album: ' + response.album.name);
-                    append('\n');
+            append('=====================================================\n');
+            append('Artist(s): ' + response.artists[0].name + '\n');
+            append('Track Name: ' + response.name + '\n');
+            append('Track Preview: ' + response.preview_url + '\n');
+            append('Album: ' + response.album.name);
+            append('\n');
         });
     });
 }
@@ -188,4 +194,3 @@ function append(append) {
         if (err) throw err;
     });
 }
-
