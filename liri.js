@@ -1,5 +1,6 @@
 var keys = require("./keys.js");
 var twitter = require("twitter");
+var request = require("request");
 var spotify = require("node-spotify-api");
 var value = "";
 var fs = require("fs");
@@ -29,10 +30,15 @@ switch (liriCommand) {
     case "spotify-this-song":
     mySpotify();
     break;
+
+    case "movie-this":
+    myMovie();
+    break;
 }
 
 
 // function for Twitter 
+
 function myTweets() {
     twitterUser.get('statuses/user_timeline', {
         q: 'carlosalfonzo33',
@@ -79,7 +85,41 @@ function mySpotify() {
                 'Track Preview: ' + response.preview_url + '\n' +
                 'Album: ' + response.album.name
             )
+                append('Artist(s): ' + response.artists[0].name + '\n');
+                append('Track Name: ' + response.name  + '\n');
+                append('Track Preview: ' + response.preview_url + '\n');
+                append('Album: ' + response.album.name + '\n');
+                append('=====================================================\n');
         }
+
+    });
+}
+
+// Funtion for Movie this. 
+
+function myMovie(){
+    var omdbUrl = "http://www.omdbapi.com/?&t=" + searchTitle + "&apikey=40e9cece";
+    console.log(searchTitle);
+    
+    request(omdbUrl, function (error, response, body) {
+                
+        if (error) {
+            return console.log('Error occurred: ' + error);
+        }
+
+        var movie = JSON.parse(body);
+            
+        console.log(
+            '\n' +
+            'Title: ' + movie.Title + '\n' +
+            'Year: '+ movie.Year + '\n' +
+            'IMDB Rating: ' + movie.imdbRating + '\n' +
+            'Rotten Tomatoes Rating: ' + movie.Ratings[1].Value + '\n' +
+            'Country: ' + movie.Country + '\n' +
+            'Language: ' + movie.Language + '\n' +
+            'Plot: ' + movie.Plot + '\n' +
+            'Actors: ' + movie.Actors + '\n'
+        );
 
     });
 }
