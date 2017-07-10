@@ -34,6 +34,10 @@ switch (liriCommand) {
     case "movie-this":
     myMovie();
     break;
+
+    case "do-what-it-says":
+    mySays();
+    break;
 }
 
 
@@ -138,6 +142,41 @@ function myMovie(){
 
     });
 }
+
+// Function for do-what-it-says
+
+function mySays(){
+     fs.readFile("random.txt", "utf8", function(error, data) {
+            
+        if (error) {
+            return console.log('Error occurred: ' + error);
+        }
+    
+        var splitData = data.split(",");
+
+        clientSpotify.search({ type: 'track', query: splitData[1] }, function(error, data) {
+            
+            if (error) {
+                return console.log('Error occurred: ' + error);
+            }
+                
+            for (var i = 0; i < data.tracks.items.length; i++) {
+
+            var response = data.tracks.items[i];
+                
+                console.log(
+                    '\n' +
+                    'Artist(s): ' + response.artists[0].name + '\n' +
+                    'Track Name: ' + response.name  + '\n' +
+                    'Track Preview: ' + response.preview_url + '\n' +
+                    'Album: ' + response.album.name
+                )
+            }
+
+        });
+    });
+}
+
 
 function append(append) {
     fs.appendFile('log.txt', append, (err) => {
