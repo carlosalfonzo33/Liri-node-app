@@ -98,6 +98,10 @@ function mySpotify() {
 // Funtion for Movie this. 
 
 function myMovie(){
+
+     if (!searchTitle){
+        searchTitle = 'Mr. Nobody';
+    }
     var omdbUrl = "http://www.omdbapi.com/?&t=" + searchTitle + "&apikey=40e9cece";
     console.log(searchTitle);
     
@@ -120,6 +124,17 @@ function myMovie(){
             'Plot: ' + movie.Plot + '\n' +
             'Actors: ' + movie.Actors + '\n'
         );
+            append('=====================================================\n');
+            append('Title: ' + movie.Title + '\n');
+            append('Year: '+ movie.Year + '\n');
+            append('IMDB Rating: ' + movie.imdbRating + '\n');
+            append('Rotten Tomatoes Rating: ' + movie.Ratings[1].Value + '\n');
+            append('Country: ' + movie.Country + '\n');
+            append('Language: ' + movie.Language + '\n');
+            append('Plot: ' + movie.Plot + '\n');
+            append('Actors: ' + movie.Actors + '\n');
+            append('\n');
+            
 
     });
 }
