@@ -102,7 +102,7 @@ function mySpotify() {
     });
 }
 
-// Funtion for Movie this. 
+// Function for Movie this. 
 
 function myMovie() {
 
@@ -188,6 +188,7 @@ function mySays() {
     });
 }
 
+// Function for logging to text file. 
 
 function append(append) {
     fs.appendFile('log.txt', append, (err) => {
