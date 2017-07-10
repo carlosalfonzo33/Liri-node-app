@@ -172,7 +172,12 @@ function mySays(){
                     'Album: ' + response.album.name
                 )
             }
-
+                    append('=====================================================\n');
+                    append('Artist(s): ' + response.artists[0].name + '\n');
+                    append('Track Name: ' + response.name  + '\n');
+                    append('Track Preview: ' + response.preview_url + '\n');
+                    append('Album: ' + response.album.name);
+                    append('\n');
         });
     });
 }
